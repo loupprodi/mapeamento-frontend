@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
 	return (
 		<NavigationContainer>
-			<StatusBar style='light' backgroundColor='rgba(0, 0, 0, 0.6)' />
+			<StatusBar style='light' backgroundColor='rgba(0, 0, 0, 0.3)' />
 			<Stack.Navigator screenOptions={{ headerShown: false }}>
 				<Stack.Screen name='Auth' component={Auth} />
 				<Stack.Screen name='MainScreen' component={MainScreen} />

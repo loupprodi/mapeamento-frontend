@@ -22,7 +22,8 @@ const logo = require("../../assets/imgs/logo.png");
 export default class Auth extends Component {
 	state = {
 		name: '',
-		lastName: '',
+		cpf: undefined,
+		phonenumber: undefined,
 		email: '',
 		password: '',
 		confirmPassword: '',
@@ -46,12 +47,19 @@ export default class Auth extends Component {
 				showError('Senhas não coincidem.');
 				return;
 			} else
-				await axios.post(`${process.env.API_URL}/users`, {
-					firstName: this.state.name,
-					lastName: this.state.lastName,
+				this.state.name,
+				this.state.cpf,
+				this.state.phonenumber,
+				this.state.email,
+				this.state.password,
+			
+				/* await axios.post(`${process.env.API_URL}/users`, {
+					name: this.state.name,
+					cpf: this.state.cpf,
+					phonenumber: this.state.phonenumber,
 					email: this.state.email,
 					password: this.state.password,
-				});
+				}); */
 
 			showSuccess('Usuário cadastrado.');
 			this.setState({ stageNew: false });
@@ -62,10 +70,12 @@ export default class Auth extends Component {
 
 	signin = async () => {
 		try {
-			await axios.post(`${process.env.API_URL}/sign-in`, {
+			this.state.email,
+			this.state.password,
+			/* await axios.post(`${process.env.API_URL}/sign-in`, {
 						email: this.state.email,
 						password: this.state.password,
-				  });
+				  }); */
 
 			this.props.navigation.navigate('MainScreen');
 		} catch (e) {
@@ -78,6 +88,7 @@ export default class Auth extends Component {
 			<ImageBackground source={backgroundImage} style={styles.backgroundImage}>
 				<Image source={logo} style={styles.logo}/>
 				<Text style={styles.title}>YSW</Text>
+				<Text style={styles.subtitle}>Seu caminho mais seguro</Text>
 				<View style={styles.formContainer}>
 					<Text style={styles.subtitle}>
 						{this.state.stageNew ? 'Crie a sua conta' : 'Informe seus dados'}
@@ -93,11 +104,20 @@ export default class Auth extends Component {
 					)}
 					{this.state.stageNew && (
 						<AuthInput
-							icon='account'
-							placeholder='Sobrenome'
-							value={this.state.lastName}
+							icon='card-account-details-outline'
+							placeholder='CPF'
+							value={this.state.cpf}
 							style={styles.input}
-							onChangeText={(lastName: String) => this.setState({ lastName })}
+							onChangeText={(cpf: Number) => this.setState({ cpf })}
+						/>
+					)}
+					{this.state.stageNew && (
+						<AuthInput
+							icon='phone'
+							placeholder='Telefone'
+							value={this.state.phonenumber}
+							style={styles.input}
+							onChangeText={(phonenumber: Number) => this.setState({ phonenumber })}
 						/>
 					)}
 					<AuthInput
@@ -157,19 +177,28 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
+
+	logo: {
+		width: '40%',
+		height: '20%',
+		borderRadius: 10,
+		opacity: 0.8,
+		marginTop: 20,
+	},
+
 	title: {
-		fontSize: 50,
-		marginBottom: 10,
+		fontSize: 32,
+		marginBottom: 8,
 		fontFamily: 'Roboto',
-		fontWeight: 'bold',
-		color: 'white',
+		fontWeight: '600',
+		color: '#585858',
 	},
 	subtitle: {
-		fontSize: 20,
+		fontSize: 13,
 		marginBottom: 10,
 		fontFamily: 'Roboto',
-		fontWeight: 'bold',
-		color: 'white',
+		fontWeight: "400",
+		color: '#585858',
 		textAlign: 'center',
 	},
 	formContainer: {
@@ -196,11 +225,11 @@ const styles = StyleSheet.create({
 		color: 'white',
 	},
 	linkSignInOrLoginIn: {
-		fontSize: 20,
+		fontSize: 16,
 		marginBottom: 10,
 		fontFamily: 'Roboto',
 		fontWeight: 'bold',
-		color: 'white',
+		color: '#585858',
 		textAlign: 'center',
 		textDecorationLine: 'underline',
 	},
