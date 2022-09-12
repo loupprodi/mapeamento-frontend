@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import Auth from './src/screens/Auth';
+import { Auth } from './src/screens/Auth'; './src/screens/Auth';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import MainScreen from './src/screens/MainScreen';
