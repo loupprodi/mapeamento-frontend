@@ -10,7 +10,9 @@ import {
 } from "react-native";
 import AuthInput from "../components/AuthInput";
 import { showError, showSuccess } from "../common";
-import axios from "axios";
+// import axios from "axios";
+
+import api from "../../services/api";
 
 const backgroundImage = require("../../assets/imgs/background2.png");
 const logo = require("../../assets/imgs/logo.png");
@@ -73,7 +75,7 @@ export const Auth = () => {
 							password: this.state.password,
 					  }); */
 
-        navigation.navigate("MainScreen");
+        navigation.navigate("MainScreen",{});
     } catch (e) {
       showError(e);
     }
@@ -114,7 +116,7 @@ export const Auth = () => {
             placeholder="Telefone"
             value={authState.phonenumber}
             style={styles.input}
-            onChangeText={(phonenumber: number) =>
+            onChangeText={(phonenumber: string) =>
               setAuthState({ ...authState, phonenumber })
             }
           />

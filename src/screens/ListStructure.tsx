@@ -9,10 +9,12 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
+  FlatList,
 } from "react-native";
 import AuthInput from "../components/AuthInput";
 import { showError, showSuccess } from "../common";
 import axios from "axios";
+import { ListStructureData } from "../components/ListStructureData";
 
 const backgroundImage = require("../../assets/imgs/background2.png");
 const logo = require("../../assets/imgs/logo.png");
@@ -20,6 +22,16 @@ const logo = require("../../assets/imgs/logo.png");
 export default function ListStructure() {
   const navigation = useNavigation();
   const [list, setList] = useState(true);
+  const [feed, setFeed] = useState([
+    {id:'1', nome:'Luiz', idade:23},
+    {id:'2', nome:'carlos', idade:23},
+    {id:'3', nome:'enthony', idade:23},
+    {id:'4', nome:'gaby', idade:23},
+    {id:'5', nome:'everton', idade:23},
+    {id:'6', nome:'lucas', idade:23},
+
+
+  ]);
 
   return (
     <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
@@ -30,6 +42,15 @@ export default function ListStructure() {
         </View>
       </TouchableOpacity>
       <Text style={styles.title}>Lista de estruturas</Text>
+
+      {/* lista de dados, componente estrutura */}
+
+      {/* <FlatList
+      showsVerticalScrollIndicator={false}
+      keyExtractor={(item) => item.id}
+      data={feed}
+      renderItem={({item }) => <ListStructureData data={item}/> } 
+      /> */}
 
       <View style={styles.formContainer}>
         <TouchableOpacity onPress={() => console.log("clicou no botão")}>
